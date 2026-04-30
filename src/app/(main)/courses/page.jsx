@@ -1,12 +1,8 @@
-// import CourseCard from "@/components/Homepage/courses/CourseCard";
-
 import CourseCard from "@/components/Homepage/courses/CourseCard";
-
-// ডাটা ফেচ করার ফাংশন (যদি আপনার lib/data তে আলাদাভাবে না থাকে)
 async function getCourses() {
     try {
         const res = await fetch("https://json-server-3-fxsb.onrender.com/courses", {
-            cache: "no-store", // ডাটা সবসময় আপডেট রাখার জন্য
+            cache: "no-store",
         });
 
         if (!res.ok) {
