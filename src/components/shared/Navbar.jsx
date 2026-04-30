@@ -26,8 +26,8 @@ const Navbar = () => {
 
             {/* Left: Logo and Brand Name */}
             <div className="flex-1 flex items-center">
-                <Link href="/" className="btn btn-ghost text-xl font-bold tracking-tight hover:text-emerald-400 transition-colors duration-200">
-                    SkillSphere
+                <Link href="/" className="text-xl font-bold tracking-tight hover:text-emerald-400 transition-colors duration-200">
+                    SkillSphere – Online Learning Platform
                 </Link>
 
                 {/* Desktop Menu Links */}
@@ -53,7 +53,6 @@ const Navbar = () => {
                     />
                 </div>
 
-                {/* Auth Logic: Loading থাকলে কিছু দেখাবে না অথবা স্পিনার দেখাতে পারেন */}
                 {!isPending && (
                     <>
                         {session ? (
