@@ -1,6 +1,6 @@
 export const getCourses = async () => {
     const res = await fetch("https://json-server-2-whcn.onrender.com/courses", {
-        cache: "no-store", // সবসময় fresh data
+        cache: "no-store",
     });
 
     if (!res.ok) {
