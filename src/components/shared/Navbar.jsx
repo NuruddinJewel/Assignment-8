@@ -12,7 +12,7 @@ const Navbar = () => {
 
     const handleLogout = () => {
         setIsLoggedIn(false);
-        router.push('/login');
+        // router.push('/login');
     };
 
     return (
