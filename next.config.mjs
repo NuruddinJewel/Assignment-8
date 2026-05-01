@@ -1,7 +1,29 @@
+// /** @type {import('next').NextConfig} */
+// const nextConfig = {
+//   images: {
+
+//     dangerouslyAllowSVG: true,
+//     contentDispositionType: 'attachment',
+//     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+
+//     remotePatterns: [
+//       {
+//         protocol: 'https',
+//         hostname: '**', 
+//       },
+//       {
+//         protocol: 'http', 
+//         hostname: '**',
+//       },
+//     ],
+//   },
+// };
+
+// export default nextConfig;
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    // SVG এরর হ্যান্ডেল করার জন্য নিচের ৩টি লাইন যোগ করা হয়েছে
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
@@ -9,11 +31,15 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: '**', // এটি সব ডোমেইন থেকে ইমেজ সাপোর্ট করবে
+        hostname: '**',
+        port: '',
+        pathname: '**',
       },
       {
-        protocol: 'http', // কিছু ইমেজ যদি http লিঙ্কে থাকে সেটার জন্য
+        protocol: 'http',
         hostname: '**',
+        port: '',
+        pathname: '**',
       },
     ],
   },
