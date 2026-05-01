@@ -6,6 +6,7 @@ import React from 'react';
 import NavLink from './NavLink';
 import { Search } from 'lucide-react';
 import { useSession, signOut } from "@/lib/auth-client";
+import LearningTips from './LearningTips';
 
 const Navbar = () => {
     const { data: session, isPending } = useSession();
@@ -35,6 +36,7 @@ const Navbar = () => {
                     <ul className="menu menu-horizontal px-1 gap-2">
                         <li><NavLink href="/">Home</NavLink></li>
                         <li><NavLink href="/courses">Courses</NavLink></li>
+                        <li><LearningTips /></li>
                         {session && <li><NavLink href="/profile">My Profile</NavLink></li>}
                     </ul>
                 </div>
