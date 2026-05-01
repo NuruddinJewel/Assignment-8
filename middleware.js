@@ -112,20 +112,43 @@ export const config = {
 //     matcher: ['/courses', '/courses/:path*'],
 // }
 
-/* 
+/*
 
 import { NextResponse } from 'next/server'
- 
+
 // This function can be marked `async` if using `await` inside
 export function proxy(request) {
   return NextResponse.redirect(new URL('/home', request.url))
 }
- 
+
 // Alternatively, you can use a default export:
 // export default function proxy(request) { ... }
- 
+
 export const config = {
   matcher: '/about/:path*',
 }
 
 */
+
+// import { NextResponse } from "next/server";
+// import { auth } from "@/utils/auth";
+
+// export async function middleware(request) {
+//   const session = await auth.api.getSession({
+//     headers: request.headers,
+//   });
+
+//   if (session) {
+//     return NextResponse.next();
+//   }
+
+//   const loginUrl = new URL("/login", request.url);
+//   loginUrl.searchParams.set("callbackUrl", request.nextUrl.pathname);
+//   return NextResponse.redirect(loginUrl);
+// }
+
+// export const config = {
+//   // /courses/1, /courses/abc — protect details page only
+//   // /courses — NOT protected (all users can see course list)
+//   matcher: ["/courses/:id([^/]+)"],
+// };

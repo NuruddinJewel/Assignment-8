@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 import NavLink from './NavLink';
-import { Search } from 'lucide-react';
+import { Globe, Search } from 'lucide-react';
 import { useSession, signOut } from "@/lib/auth-client";
 import LearningTips from './LearningTips';
 import TopInstructors from './TopInstructors';
@@ -28,10 +28,19 @@ const Navbar = () => {
 
             {/* Left: Logo and Brand Name */}
             <div className="flex-1 flex items-center">
-                <Link href="/" className="text-xl font-bold tracking-tight hover:text-emerald-400 transition-colors duration-200">
+                {/* <Link href="/" className="text-xl font-bold tracking-tight hover:text-emerald-400 transition-colors duration-200">
                     SkillSphere – Online Learning Platform
-                </Link>
+                </Link> */}
+                <Link href="/" className="flex items-center gap-2 group transition-all duration-300">
+                    <div className="bg-emerald-500 p-1.5 rounded-lg group-hover:bg-emerald-400 transition-colors">
+                        <Globe className="text-white w-6 h-6" strokeWidth={2.5} />
+                    </div>
 
+                    <span className="text-2xl font-extrabold tracking-tight flex items-center">
+                        <span className="text-white">Skill</span>
+                        <span className="text-emerald-500 group-hover:text-emerald-400 transition-colors">Sphere</span>
+                    </span>
+                </Link>
                 {/* Desktop Menu Links */}
                 <div className="hidden lg:flex ml-4">
                     <ul className="menu menu-horizontal px-1 gap-2">
