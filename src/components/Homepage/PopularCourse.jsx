@@ -1,4 +1,4 @@
-"use client"; // Marquee এর জন্য ক্লায়েন্ট কম্পোনেন্ট প্রয়োজন
+"use client";
 import React, { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
 import CourseCard from "./courses/CourseCard";
@@ -72,7 +72,7 @@ const PopularCourses = () => {
                 ) : (
                     <Marquee
                         gradient={true}
-                        gradientColor="#042f2c" // আপনার ব্যানারের ব্যাকগ্রাউন্ড কালার
+                        gradientColor="#042f2c"
                         gradientWidth={100}
                         speed={50}
                         pauseOnHover={true}

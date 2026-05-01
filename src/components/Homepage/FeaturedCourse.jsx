@@ -9,7 +9,7 @@ async function getFeaturedCourses() {
     try {
         const response = await fetch(API_URL, {
             cache: 'no-store',
-            next: { revalidate: 3600 }
+            // next: { revalidate: 3600 }
         });
         if (!response.ok) throw new Error("Failed to fetch courses");
         const data = await response.json();

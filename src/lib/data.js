@@ -1,5 +1,5 @@
 export const getCourses = async () => {
-    const res = await fetch("https://json-server-2-whcn.onrender.com/courses", {
+    const res = await fetch("https://json-server-3-fxsb.onrender.com/courses", {
         cache: "no-store",
     });
 
