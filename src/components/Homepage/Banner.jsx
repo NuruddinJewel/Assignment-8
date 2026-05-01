@@ -86,10 +86,10 @@ const Banner = () => {
                         className="object-contain object-bottom drop-shadow-[0_20px_50px_rgba(16,185,129,0.3)]"
                     />
                 </div>
-
             </div>
         </section>
     );
 };
 
 export default Banner;
+
