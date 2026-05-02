@@ -1,7 +1,8 @@
 "use client";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation"; // useSearchParams 
 import NavLink from "./NavLink";
 import { Globe, Search } from "lucide-react";
 import { useSession, signOut } from "@/lib/auth-client";
@@ -12,6 +13,26 @@ import TopInstructors from "./TopInstructors";
 const Navbar = () => {
     const { data: session, isPending } = useSession();
     const router = useRouter();
+    const searchParams = useSearchParams();
+
+
+    const [searchTerm, setSearchTerm] = useState(searchParams.get("search") || "");
+
+    // Dynamic Search Logic (Debouncing)
+    useEffect(() => {
+        const delayDebounceFn = setTimeout(() => {
+
+            if (searchTerm.trim()) {
+                router.push(`/courses?search=${encodeURIComponent(searchTerm)}`, { scroll: false });
+            }
+
+            else if (searchTerm === "" && searchParams.get("search")) {
+                router.push(`/courses`, { scroll: false });
+            }
+        }, 300);
+
+        return () => clearTimeout(delayDebounceFn);
+    }, [searchTerm, router, searchParams]);
 
     const handleLogout = async () => {
         await signOut({
@@ -67,13 +88,15 @@ const Navbar = () => {
 
             {/* Right: Search + Auth */}
             <div className="flex-none flex items-center gap-4">
-                {/* Search */}
-                <div className="hidden sm:flex items-center bg-white/10 rounded-lg px-3 py-1.5 gap-2 focus-within:bg-white/20 transition-colors duration-200">
+                {/* Dynamic Search Box */}
+                <div className="hidden sm:flex items-center bg-white/10 rounded-lg px-3 py-1.5 gap-2 focus-within:bg-white/20 transition-colors duration-200 border border-transparent focus-within:border-emerald-500/50">
                     <Search className="h-4 w-4 text-white/60 shrink-0" />
                     <input
                         type="text"
                         placeholder="Search courses..."
-                        className="bg-transparent outline-none text-sm text-white placeholder-white/50 w-40"
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="bg-transparent outline-none text-sm text-white placeholder-white/50 w-40 sm:w-60 transition-all duration-300"
                     />
                 </div>
 
@@ -89,7 +112,6 @@ const Navbar = () => {
                                     Logout
                                 </button>
 
-                                {/* Avatar Dropdown */}
                                 <div className="dropdown dropdown-end">
                                     <div
                                         tabIndex={0}
@@ -98,10 +120,7 @@ const Navbar = () => {
                                     >
                                         <div className="w-10 h-10 rounded-full relative overflow-hidden bg-emerald-900/50">
                                             <Image
-                                                src={
-                                                    session.user.image ||
-                                                    "https://wallpapercave.com/wp/DZ9fPjm.jpg"
-                                                }
+                                                src={session.user.image || "https://wallpapercave.com/wp/DZ9fPjm.jpg"}
                                                 alt="User Avatar"
                                                 fill
                                                 className="object-cover"
@@ -117,18 +136,12 @@ const Navbar = () => {
                                         </li>
                                         <li>
                                             <Link href="/profile" className="justify-between">
-                                                Profile{" "}
-                                                <span className="badge badge-success badge-outline">New</span>
+                                                Profile <span className="badge badge-success badge-outline">New</span>
                                             </Link>
                                         </li>
+                                        <li><Link href="#">Settings</Link></li>
                                         <li>
-                                            <Link href="#">Settings</Link>
-                                        </li>
-                                        <li>
-                                            <button
-                                                onClick={handleLogout}
-                                                className="text-red-400 w-full text-left"
-                                            >
+                                            <button onClick={handleLogout} className="text-red-400 w-full text-left">
                                                 Logout
                                             </button>
                                         </li>
@@ -156,3 +169,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
