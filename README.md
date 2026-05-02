@@ -41,3 +41,6 @@ The following additional npm packages have been integrated to enhance functional
 
 ---
 
+## 🚀 Live URL
+
+Experience the platform live here: https://assignment-8-flame.vercel.app/
