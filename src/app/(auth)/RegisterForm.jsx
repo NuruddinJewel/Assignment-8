@@ -1,18 +1,17 @@
-"use client"
+"use client";
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { signUp } from "@/lib/auth-client";
+import { toast } from "react-toastify";
 import SocialLogin from "./SocialLogin";
 
 const RegisterForm = () => {
     const router = useRouter();
-    const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError("");
         setLoading(true);
 
         const name = e.target.name.value;
@@ -29,9 +28,20 @@ const RegisterForm = () => {
         });
 
         if (error) {
-            setError(error.message || "Registration failed. Please try again.");
+            //  Email already exists / weak password 
+            toast.error(error.message || "Registration failed. Please try again.", {
+                position: "top-right",
+                autoClose: 4000,
+                theme: "dark",
+            });
         } else {
-            router.push("/login");
+            //  Signup success
+            toast.success("Sign up successful! Please login. 🎉", {
+                position: "top-right",
+                autoClose: 2500,
+                theme: "dark",
+            });
+            setTimeout(() => router.push("/login"), 1000);
         }
 
         setLoading(false);
@@ -40,8 +50,6 @@ const RegisterForm = () => {
     return (
         <div className="min-h-screen bg-[#0d2b2e] flex items-center justify-center px-4">
             <div className="w-full max-w-md">
-
-                {/* Card */}
                 <div className="bg-[#123e41] rounded-2xl shadow-2xl p-8 border border-white/10">
 
                     {/* Title */}
@@ -49,16 +57,6 @@ const RegisterForm = () => {
                         <h1 className="text-3xl font-bold text-white tracking-tight">Create account</h1>
                         <p className="text-white/50 mt-2 text-sm">Join SkillSphere and start learning</p>
                     </div>
-
-                    {/* Error Toast */}
-                    {error && (
-                        <div className="alert alert-error mb-6 py-3 text-sm">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
-                            <span>{error}</span>
-                        </div>
-                    )}
 
                     {/* Form */}
                     <form onSubmit={handleSubmit} className="space-y-4">
@@ -123,13 +121,10 @@ const RegisterForm = () => {
                         </button>
                     </form>
 
-                    {/* Divider */}
                     <div className="divider text-white/30 text-xs my-6">OR</div>
 
-                    {/* Google Login */}
                     <SocialLogin />
 
-                    {/* Login Link */}
                     <p className="text-center text-white/50 text-sm mt-6">
                         Already have an account?{" "}
                         <Link href="/login" className="text-emerald-400 hover:text-emerald-300 font-medium">

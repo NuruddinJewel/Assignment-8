@@ -63,23 +63,23 @@
 
 // 2
 
-export async function middleware(request) {
-  const session = await auth.api.getSession({
-    headers: request.headers,
-  });
+// export async function middleware(request) {
+//   const session = await auth.api.getSession({
+//     headers: request.headers,
+//   });
 
-  if (session) {
-    return NextResponse.next();
-  }
+//   if (session) {
+//     return NextResponse.next();
+//   }
 
-  const loginUrl = new URL("/login", request.url);
-  loginUrl.searchParams.set("callbackUrl", request.nextUrl.pathname);
-  return NextResponse.redirect(loginUrl);
-}
+//   const loginUrl = new URL("/login", request.url);
+//   loginUrl.searchParams.set("callbackUrl", request.nextUrl.pathname);
+//   return NextResponse.redirect(loginUrl);
+// }
 
-export const config = {
-  matcher: ["/courses/:path+"],
-};
+// export const config = {
+//   matcher: ["/courses/:path+"],
+// };
 
 // import { NextResponse } from "next/server";
 // import { auth } from "@/utils/auth";
@@ -152,3 +152,27 @@ export const config = {
 //   // /courses — NOT protected (all users can see course list)
 //   matcher: ["/courses/:id([^/]+)"],
 // };
+
+
+import { NextResponse } from "next/server";
+import { auth } from "@/utils/auth"; // your better-auth server instance
+
+export async function middleware(request) {
+  const session = await auth.api.getSession({
+    headers: request.headers,
+  });
+
+  if (session) {
+    return NextResponse.next();
+  }
+
+  // Not logged in → save intended destination, redirect to /login
+  const loginUrl = new URL("/login", request.url);
+  loginUrl.searchParams.set("callbackUrl", request.nextUrl.pathname);
+  return NextResponse.redirect(loginUrl);
+}
+
+export const config = {
+  // Protects /courses/[id] but NOT /courses (listing page is public)
+  matcher: ["/courses/:id+"],
+};
