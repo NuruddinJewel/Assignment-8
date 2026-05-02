@@ -46,7 +46,7 @@ const PopularCourses = () => {
                             Student Favorites
                         </div>
                         <h2 className="text-3xl lg:text-5xl font-black text-white leading-tight">
-                            Most <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-teal-300">Popular</span> Pickups
+                            Most <span className="text-transparent bg-clip-text bg-linear-to-r from-emerald-400 to-teal-300">Popular</span> Pickups
                         </h2>
                         <p className="text-slate-300/70 text-lg max-w-2xl leading-relaxed">
                             {"Don't just take our word for it. Join thousands of learners currently mastering these trending skills."}
@@ -80,7 +80,7 @@ const PopularCourses = () => {
                         className="py-10"
                     >
                         {courses.map((course) => (
-                            <div key={course.id} className="mx-4 w-[300px] md:w-[350px]">
+                            <div key={course.id} className="mx-4 w-75 md:w-87.5">
                                 <CourseCard course={course} />
                             </div>
                         ))}
