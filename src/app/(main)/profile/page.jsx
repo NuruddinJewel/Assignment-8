@@ -7,6 +7,7 @@ import Link from "next/link";
 import {
     User, Mail, BookOpen, Clock,
     Award, GraduationCap, Settings, LogOut,
+    Pencil,
 } from "lucide-react";
 
 const ProfilePage = () => {
@@ -74,7 +75,7 @@ const ProfilePage = () => {
         <div className="min-h-screen bg-[#0d2b2e]">
 
             {/* Hero Banner */}
-            <div className="bg-gradient-to-r from-[#042f2c] via-[#064e44] to-[#042f2c] pt-12 pb-24">
+            <div className="bg-linear-to-r from-[#042f2c] via-[#064e44] to-[#042f2c] pt-12 pb-24">
                 <div className="max-w-5xl mx-auto px-4 lg:px-8 flex flex-col sm:flex-row items-center gap-6">
                     {/* Avatar */}
                     <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-emerald-500/50 shrink-0">
@@ -94,7 +95,7 @@ const ProfilePage = () => {
                     </div>
 
                     {/* User Info */}
-                    <div className="text-center sm:text-left">
+                    {/* <div className="text-center sm:text-left">
                         <h1 className="text-3xl font-extrabold text-white">{user.name}</h1>
                         <p className="text-emerald-400 flex items-center justify-center sm:justify-start gap-2 mt-1 text-sm">
                             <Mail className="w-4 h-4" /> {user.email}
@@ -102,6 +103,23 @@ const ProfilePage = () => {
                         <span className="mt-3 inline-block badge bg-emerald-600 border-none text-white text-xs px-3 py-2">
                             Student
                         </span>
+                    </div> */}
+                    <div className="text-center sm:text-left">
+                        <h1 className="text-3xl font-extrabold text-white">{user.name}</h1>
+                        <p className="text-emerald-400 flex items-center justify-center sm:justify-start gap-2 mt-1 text-sm">
+                            <Mail className="w-4 h-4" /> {user.email}
+                        </p>
+                        <div className="flex items-center gap-3 justify-center sm:justify-start mt-3">
+                            <span className="inline-block badge bg-emerald-600 border-none text-white text-xs px-3 py-2">
+                                Student
+                            </span>
+                            <Link
+                                href="/profile/edit"
+                                className="inline-flex items-center gap-1.5 text-xs text-emerald-300 hover:text-white border border-emerald-600/50 hover:border-emerald-400 px-3 py-1.5 rounded-full transition-all duration-200"
+                            >
+                                <Pencil className="w-3 h-3" /> Edit Profile
+                            </Link>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -201,7 +219,7 @@ const ProfilePage = () => {
                         </div>
 
                         {/* Premium Card */}
-                        <div className="bg-gradient-to-br from-amber-50 to-yellow-100 border border-amber-200 p-6 rounded-2xl">
+                        <div className="bg-linear-to-br from-amber-50 to-yellow-100 border border-amber-200 p-6 rounded-2xl">
                             <Award className="w-8 h-8 text-amber-500 mb-3" />
                             <p className="font-bold text-amber-900 text-sm">Upgrade to Premium</p>
                             <p className="text-amber-800 text-xs mt-1 mb-4">Get unlimited access to all courses.</p>
